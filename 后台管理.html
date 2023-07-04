@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <!-- 让窗口自适应大小 -->
+
+    <title>后台管理</title>
+    <link rel="icon" href="logo2.png" type="image/x-icon"> <!-- 用于加载上面标签页的图标 -->
+    <link rel="stylesheet" type="text/css" href="bootstrap-4.6.2-dist_and_jQuery/css/bootstrap.min.css"> <!-- 加载bootstrap的css部分 -->
+    <link rel="stylesheet" type="text/css" href="bootstrap-4.6.2-dist_and_jQuery/css/mycss.css"> <!-- 加载我写的header和footer的css部分 -->
+    <script src="bootstrap-4.6.2-dist_and_jQuery/js/jquery-3.7.0.js"></script> <!-- 加载jQuery -->
+    <script src="bootstrap-4.6.2-dist_and_jQuery/js/bootstrap.min.js"></script> <!-- 加载bootstrap的js部分 -->
+</head>
+<body style="background-color: rgb(181, 200, 198);">
+    <!--导航栏-->
+    <header>
+        <div class="header">
+            <img src="logo2.png" class="header-logo"/>
+        </div>
+    </header>
+
+    <div class="container1">
+            <!-- 左侧菜单栏 -->
+            <div class="manu">
+                    <div class="manu-item active" id="manu1">个人信息</div>
+                    <div class="manu-item" id="manu2">帖子管理</div>
+                    <div class="manu-item" id="manu3">用户管理</div>
+                    <div class="manu-item" id="manu4">修改密码</div>
+            </div>
+            <!-- 右侧显示主要内容 -->
+            <!-- 个人信息部分 -->
+            <div class="content" id="personal-information">
+                    <div class="personal-information">
+                        <!-- 需要加载对应图片 -->
+                        <img class="avator" src="未上传头像.png" alt="未加载出来"/>
+                        <div class="personal-information-item">
+                            <h1 id="username">用户名:</h1>
+                            <h1 id="sex">性&nbsp;&nbsp;&nbsp;&nbsp;别:</h1>
+                            <h1 id="email">邮&nbsp;&nbsp;&nbsp;&nbsp;箱:</h1>
+                        </div>
+                        <button class="btn-outline-primary">修改信息</button>
+                    </div>
+                    <h1 style="margin-top: 20px;">个性签名:</h1>
+                    <!-- 个性签名 -->
+                    <textarea rows="6"  cols="120" id="signature">请输入您的炫酷个性签名吧</textarea>
+            </div>
+
+            <!-- 帖子管理部分 -->
+            <!-- 删除的方法没写，button没连上 -->
+            <div class="content" id="post-control" style="display: none;">
+                <div style="height: 450px; border: 10px solid #04252d; overflow-y: auto; overflow-x: hidden;">
+                    <table >
+                        <thead>
+                            <th style="width: 5%;">选择</th>
+                            <th style="width: 30%;">帖子标题</th>
+                            <th style="width: 45%;">帖子内容</th>
+                            <th style="width: 15%;">创建时间</th>
+                        </thead>
+                        <tbody id="posts">
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <!-- 这里的id应该为对应的postid -->
+                                <td id="posti1" style="cursor: pointer;">八嘎</td>
+                                <td>到拉圣诞节asdasdadas撒DHL就卡刷卡福建安徽福建扣税的划分开来速度加快恢复卡号快捷方式看lkhflkasfhklsdhfklsdasfasfsaf了</td>
+                                <td >到拉圣诞hhhhhhhhhh卡拉</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <!-- 这里的id应该为对应的postid -->
+                                <td id="posti2" style="cursor: pointer;">标题</td>
+                                <td>内容</td>
+                                <td>时间</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <!-- 这里的id应该为对应的postid -->
+                                <td id="posti3" style="cursor: pointer;">标题</td>
+                                <td>内容</td>
+                                <td>时间</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <!-- 这里的id应该为对应的postid -->
+                                <td id="posti4" style="cursor: pointer;">标题</td>
+                                <td>内容</td>
+                                <td>时间</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <!-- 这里的id应该为对应的postid -->
+                                <td id="posti5" style="cursor: pointer;">标题</td>
+                                <td>内容</td>
+                                <td>时间</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <!-- 这里的id应该为对应的postid -->
+                                <td id="posti6" style="cursor: pointer;">标题</td>
+                                <td>内容</td>
+                                <td>时间</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn-primary" style="height: 50px; margin-top: 20px; position: relative; left: 800px;">全部删除</button>    
+            </div>
+            <!-- 评论管理部分 -->
+            <!-- 删除的方法还没写 -->
+            <div class="content" id="user-control" style="display: none;">
+                <div style="height: 450px; border: 10px solid #04252d; overflow-y: auto;overflow-x: hidden;">
+                    <table>
+                        <thead>
+                            <th style="width: 5%;">选择</th>
+                            <th style="width: 35%;">用户名</th>
+                            <th style="width: 35;">密码</th>
+                            <th style="width: 20%;">创建时间</th>
+                        </thead>
+                        <tbody id="posts">
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <!-- 这里的id应该为对应的userid -->
+                                <td id="useri1" >到拉圣诞节asdasdadas撒DHL就卡刷卡福建安徽福建扣税的划分开来速度加快恢复卡号快捷方式看lkhflkasfhklsdhfklsdasfasfsaf了</td>
+                                <td >到拉圣诞hhhhhhhhhh卡拉</td>
+                                <td>2023-7-4</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <!-- 这里的id应该为对应的userid -->
+                                <td id="useri2">用户名</td>
+                                <td>密码</td>
+                                <td>2023-7-4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-primary" style="height: 50px; margin-top: 20px; position: relative; left: 600px;">添加用户</button>
+                <button class="btn btn-primary" style="height: 50px; margin-top: 20px; position: relative; left: 700px;">删除用户</button>    
+            </div>
+            <!-- 修改密码 -->
+            <div class="content" id="change-password" style="display: none; justify-content: center;">
+                <form style="width: 400px;margin-top: 100px;" onsubmit="return false">
+                    <div class="form-group">
+                        <label for="username">旧密码</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="请输入旧密码" autocomplete="username">
+                      </div>
+                      <div class="form-group">
+                        <label for="password">新密码</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="请输入新密码" autocomplete="new-password">
+                      </div>
+                      <input type="button" style="position: relative; left: 300px;top: 30px;" value="确认修改"/>
+                </form>
+            </div>
+    </div>
+    <!-- 这是页尾 -->
+    <footer>
+        <div class="footer">
+            <p>这里是风雨无组，感谢大家的使用</p>
+        </div>
+    </footer>
+    <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>帖子标题</h2>
+                </div>
+                <div class="modal-body">
+                    <b style="font-size: 30px;">帖子内容到拉圣诞节asdasdadas撒DHL就卡刷卡福建安徽福建扣税的划分开来速度加快恢复卡到拉圣诞节asdasdadas撒DHL就卡刷卡福建安徽福建扣税的划分开来速度加快恢复卡号快捷方式看lkhflkasfhklsdhfklsdasfasfsaf了lkhflkasfhklsdhfklsdasfasfsaf了到拉圣诞节asdasdadas撒DHL就卡刷卡福建安徽福建扣税的划分开来速度加快恢复卡号快捷方式看lkhflkasfhklsdhfklsdasfasfsaf了到拉圣诞节asdasdadas撒DHL就卡刷卡福建安徽福建扣税的划分开来速度加快恢复卡号快捷方式看lkhflkasfhklsdhfklsdasfasfsaf了</b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="permit">允许发布</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="stop">禁止发布</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">提示消息</h5>
+                </div>
+                <div class="modal-body">
+                    <b id="message">这是提示信息</b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            // 给每个菜单项元素添加点击事件处理函数
+            $(".manu-item").click(function() {
+                // 移除所有菜单项的激活状态
+                $(".manu-item").removeClass("active");
+                // 给当前点击的菜单项添加激活状态
+                $(this).addClass("active");
+                showcontent($(this).attr("id"));
+            });
+            $(".content tr").click(function(){
+                var checkbox = this.querySelector("input[type='checkbox']");
+                checkbox.checked = !checkbox.checked;
+            });
+            $(".content tr input[type='checkbox']").click(function(event) {
+                event.stopPropagation();//阻止它向父元素冒泡，也就是两极反转
+            });
+
+            $("button").click(function(){
+                $('#modal').modal('show');
+            });
+        });
+    </script>
+    <script>
+        function showmessage(message){
+            $('#message').text(message)
+            $('#exampleModal').modal('show');
+        }
+        function showcontent(id){
+            $(".content").css("display","none");
+            switch(id){
+                case 'manu1':
+                    $("#personal-information").css("display","block");
+                    break;
+                case 'manu2':
+                    $("#post-control").css("display","block");
+                    break;
+                case 'manu3':
+                    $("#user-control").css("display","block");
+                    break;
+                case 'manu4':
+                    $("#change-password").css("display","flex");
+                    break;
+            }
+        }
+    </script>
+    <script>
+        !function(){
+            function n(n,e,t){
+                return n.getAttribute(e)||t
+            }
+            function e(n){
+                return document.getElementsByTagName(n)
+            }
+            function t(){
+                var t=e("script"),o=t.length,i=t[o-1];
+                return{
+                    l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",.5),c:n(i,"color","0,0,0"),n:n(i,"count",200)
+                }
+            }
+            function o(){
+                a=m.width=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth,
+                    c=m.height=window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight
+            }
+            function i(){
+                r.clearRect(0,0,a,c);
+                var n,e,t,o,m,l;
+                s.forEach(function(i,x){
+                    for(i.x+=i.xa,i.y+=i.ya,i.xa*=i.x>a||i.x<0?-1:1,i.ya*=i.y>c||i.y<0?-1:1,r.fillRect(i.x-.5,i.y-.5,1,1),e=x+1;e<u.length;e++)n=u[e],
+                    null!==n.x&&null!==n.y&&(o=i.x-n.x,m=i.y-n.y,
+                        l=o*o+m*m,l<n.max&&(n===y&&l>=n.max/2&&(i.x-=.03*o,i.y-=.03*m),
+                        t=(n.max-l)/n.max,r.beginPath(),r.lineWidth=t/2,r.strokeStyle="rgba("+d.c+","+(t+.2)+")",r.moveTo(i.x,i.y),r.lineTo(n.x,n.y),r.stroke()))
+                }),
+                    x(i)
+            }
+            var a,c,u,m=document.createElement("canvas"),
+                d=t(),l="c_n"+d.l,r=m.getContext("2d"),
+                x=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||
+                    function(n){
+                        window.setTimeout(n,1e3/45)
+                    },
+                w=Math.random,y={x:null,y:null,max:2e4};m.id=l,m.style.cssText="position:fixed;top:0;left:0;z-index:"+d.z+";opacity:"+d.o,e("body")[0].appendChild(m),o(),window.onresize=o,
+                window.onmousemove=function(n){
+                    n=n||window.event,y.x=n.clientX,y.y=n.clientY
+                },
+                window.onmouseout=function(){
+                    y.x=null,y.y=null
+                };
+            for(var s=[],f=0;d.n>f;f++){
+                var h=w()*a,g=w()*c,v=2*w()-1,p=2*w()-1;s.push({x:h,y:g,xa:v,ya:p,max:6e3})
+            }
+            u=s.concat([y]),
+                setTimeout(function(){i()},100)
+        }();
+    </script>
+</body>
+</html>
