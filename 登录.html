@@ -74,16 +74,21 @@
           }
           $.ajax({
             type:"POST",
-            url: "#",//已经自己写后端验证过了，等待后端写好路由接口，请求包含一串字符串，以&分开，希望返回一个字符串true表示登录成功，false表示登录失败
+            url: "http://localhost:8080/text3/login",//已经自己写后端验证过了，等待后端写好路由接口，请求包含一串字符串，以&分开，希望返回一个字符串true表示登录成功，false表示登录失败
             data: $(this).serialize(),
             success : function(response){
               //返回数据包括一个登陆是否成功和身份例如"true;用户","true;管理员"
-              response.split(";");
-              if(response[0] == "true"){
+              var arr=response.split(";");
+              if(arr[0] == "true"){
                 showmessage("登陆成功，3s后跳转至首页");
-                document.cookie = "logined=true; permission="+response[1]+";";
+                document.cookie = "logined=true;";
+                document.cookie = "permission="+arr[1]+";";
+                document.cookie = "userid="+arr[2]+";";
                 setTimeout(function() {
-                  window.location.href = "首页.html";
+                	if(arr[1]=="用户")
+                  		window.location.href = "首页.html";
+                	else
+                		window.location.href = "后台管理.html";
                   }, 3000);
               }
               else{

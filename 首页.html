@@ -35,52 +35,9 @@
         </div>
     </div>
     
-    <!--帖子区-->
-    <div class="container" style="min-height: 100vh; background-color: #d3dfd6; padding: 100px">
+    <div class="container" style="min-height: calc(100vh - 50px); background-color: #d3dfd6; padding: 100px">
         <div id="posts">  
-            <div class="card" style="margin-top: 100px;">
-                <div class="card-header">
-                    <img src="头像.png" alt="未加载出来" style="border-radius: 50%; width: 40px; height: 40px;">
-                    <h1 id="1">帖子标题</h1>
-                </div>
-                <div class="card-body">
-                    <small>2023-7-4</small>
-                    <small style="margin-left: 30px;">John</small>
-                    <p>#帖子标签# #梯子标签#这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容</p>
-                </div>
-            </div>
-            <div class="card" style="margin-top: 100px;">
-                <div class="card-header">
-                    <h1 id="2">帖子标题</h1>
-                </div>
-                <div class="card-body">
-                    <p>这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容</p>
-                </div>
-            </div>
-            <div class="card" style="margin-top: 100px;">
-                <div class="card-header">
-                    <h1 id="3">帖子标题</h1>
-                </div>
-                <div class="card-body">
-                    <p>这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容</p>
-                </div>
-            </div>
-            <div class="card" style="margin-top: 100px;">
-                <div class="card-header">
-                    <h1 id="4">帖子标题</h1>
-                </div>
-                <div class="card-body">
-                    <p>这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容</p>
-                </div>
-            </div>
-            <div class="card" style="margin-top: 100px;">
-                <div class="card-header">
-                    <h1 id="post4">帖子标题</h1>
-                </div>
-                <div class="card-body">
-                    <p>这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容</p>
-                </div>
-            </div>
+            
         </div>
     </div>
     <!-- 这是页尾 -->
@@ -112,8 +69,8 @@
     </script>
     <script>
         $(function(){
-            // showPosts() 动态显示帖子
-            console.log(document.cookie);
+            showPosts()//动态显示帖子
+            //console.log(document.cookie);
             $("h1").click(function(){
                 document.cookie="postid="+$(this).attr("id");+";";
                 window.location.href = "帖子.html";
@@ -124,25 +81,33 @@
 
         function showPosts(){
             $.ajax({
-                url: "#",
+                url: "http://localhost:8080/text3/showposts",
                 type:"POST",
                 dataType:"text",
                 success:function(data){
                     var html="";
                     var arr=data.split(";");
-                    for(var i = 0; i < arr.length; i+=3){
+                    console.log(arr);
+                    for(var i = 0; i < arr.length-1; i+=6){
                         html+='<div class="card" style="margin-top: 100px;">'+
-                            '<div class="card-header"'+
-                                '<h1 href="帖子.html" id="'+arr[i]+'">'+arr[i+1]+'</h1>'+
-                            '</div>'+
-                            '<div class="card-body">'+
-                                '<p>'+arr[i+2]+'</p>'
-                            '</div>'+
-                        '</div>';
+                        		'<div class="card-header">'+
+                        			'<img src="'+arr[i]+'" alt="未加载出来" style="border-radius: 50%; width: 40px; height: 40px;">'+
+                        			'<h1 id="'+arr[i+1]+'">'+arr[i+2]+'</h1>'+
+                    			'</div>'+
+                    			'<div class="card-body" style="max-height: 120px; overflow: hidden; text-overflow: ellipsis;">'+
+                        			'<small>'+arr[i+3]+'</small>'+
+                        			'<small style="margin-left: 30px;">'+arr[i+4]+'</small>'+
+                        			'<p>'+arr[i+5]+'</p>'+
+                    		  	'</div>'+
+                			  '</div>';
                     }
                     $("#posts").html(html);
                     $(".card").fadeIn(1000);
-
+                    $("h1").click(function(){
+                        document.cookie="postid="+$(this).attr("id");+";";
+                        window.location.href = "帖子.html";
+                        // showmessage(document.cookie); 测试cookie是否改变
+                    });
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     showmessage("获取帖子失败");

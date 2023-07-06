@@ -38,11 +38,11 @@
     <!--帖子区-->
     <div class=" container" style="min-height: 100vh; display: flex; justify-content: flex-start; flex-direction: column; align-items: center;">
         <img src="logo2.png" class="search-logo" />
-        <form class="search-form">
+        <form class="search-form" id="search-form1" onsubmit="return false;">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" style="height: 60px;" placeholder="请输入你想要搜索的内容">
+                <input type="text" class="form-control" style="height: 60px;" placeholder="请输入你想要搜索的内容" name="search">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="submit" style="width: 130px; color: black;" id="search">搜索</button>
+                  <button class="btn btn-outline-secondary" type="submit" style="width: 130px; color: black;">搜索</button>
                 </div>
             </div>
         </form>
@@ -66,13 +66,13 @@
     </div>
     <script>
         $(function(){
-            $("#search-form").submit(function(event){
+            $("#search-form1").submit(function(event){
                 $.ajax({
-                    type: "GET",
-                    url: "#",
+                    type: "POST",
+                    url: "http://localhost:8080/text3/search",
                     data: $(this).serialize(),
                     success: function(data){
-                        //返回的data为字符串，内容是postid，以逗号分开，例如"1，2，5，4，23"
+                        //返回的data为字符串，内容是postid，以|分开，例如"1|2|5|4|3"
                         document.cookie="numbers="+data+";";
                         window.location.href = "搜索-2.html";
                     },

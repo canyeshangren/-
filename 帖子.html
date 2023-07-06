@@ -38,22 +38,7 @@
     <!--帖子区-->
     <div class="container" style="min-height: 100vh; background-color: #d3dfd6; padding: 100px">
         <div id="posts">  
-            <div class="card" style="margin-top: 100px;">
-                <div class="card-header">
-                    <h1 href="#">帖子标题</h1>
-                </div>
-                <div class="card-body">
-                    <p>这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容这是帖子的内容</p>
-                </div>
-            </div>
-            <div class="card" style="margin-top: 100px;">
-                <div class="card-header">
-                    <h1 href="#">作者</h1>
-                </div>
-                <div class="card-body">
-                    <p>这是帖子的评论这是帖子的评论这是帖子的评论这是帖子的评论这是帖子的评论这是帖子的评论这是帖子的评论这是帖子的评论这是帖子的评论这是帖子的评论这是帖子的评论</p>
-                </div>
-            </div>
+            
         </div>
     </div>
     <!-- 这是页尾 -->
@@ -85,50 +70,73 @@
     </script>
     <script>
         $(function(){
-            // showPosts() 动态显示帖子
+            showPosts(); //动态显示帖子
 
         })
         function showPosts(){
-            var cookies=document.cookie.split(";");
-            for(var i=0; i<cookies.length; i++){
-                var cookie=cookies[i].trim();
-                if (cookie.indexOf('postid=') == 0){
-                    $.ajax({
-                        url: "#?"+cookie,
-                        type:"POST",
-                        dataType:"text",
-                        success:function(data){
-                            //这一部分是帖子的id，帖子的标题和内容
-                            var html='<div class="card" style="margin-top: 100px;">'+
-                                    '<div class="card-header">'+
-                                        '<h1 id="'+arr[0]+'">'+arr[1]+'</h1>'+
-                                    '</div>'+
-                                    '<div class="card-body">'+
-                                        '<p>'+arr[2]+'</p>'
-                                    '</div>'+
-                                '</div>';
-                            var arr=data.split(";");
+          $.ajax({
+              url: "http://localhost:8080/text3/post",
+              type:"POST",
+              success:function(response){
+                  //这一部分是帖子的id，帖子的标题和内容
+                  var arr=response.split(";");
+                  var html='<div class="card" style="margin-top: 100px; margin-bottom: 100px;">'+
+            		    '<div class="card-header">'+
+        			        '<img src="'+arr[0]+'" alt="未加载出来" style="border-radius: 50%; width: 40px; height: 40px;">'+
+        			    	'<h1 id="'+arr[1]+'">'+arr[2]+'</h1>'+
+     			    '</div>'+
+     				'<div class="card-body" style="height: 300px; overflow: auto;">'+
+         				'<small>'+arr[3]+'</small>'+
+         				'<small style="margin-left: 30px;">'+arr[4]+'</small>'+
+         				'<p>'+arr[5]+'</p>'+
+     		  		'</div>'+
+ 			    '</div>'+
+                '<form id="comment-submit" onsubmit="return false;">'+
+	                '<div class="input-group mb-3">'+
+	                    '<input type="text" class="form-control" style="height: 50px;" placeholder="请输入你想要发表的内容" name="commentbody">'+
+	                    '<div class="input-group-append">'+
+	                        '<button class="btn btn-outline-secondary" type="submit" style="width: 100px; color: black;" id="search">发表</button>'+
+	                    '</div>'+
+	                '</div>'+
+	            '</form>';
+                  for(var i = 6; i < arr.length-1; i+=3){//需要的是评论的id和评论的作者以及评论内容
+                      html+='<div class="card">'+
+                          '<div class="card-header">'+
+                          	'<img src="'+arr[i]+'" alt="未加载出来" style="border-radius: 50%; width: 40px; height: 40px;">'+
+                              '<h4>'+arr[i+1]+'</h4>'+
+                          '</div>'+
+                          '<div class="card-body">'+
+                              '<p>'+arr[i+2]+'</p>'+
+                          '</div>'+
+                      '</div>';
+                  }
+                  $("#posts").html(html);
+                  $("#comment-submit").submit(function(event){
+                      $.ajax({
+                          url:"http://localhost:8080/text3/commentsubmit",
+                          type:"POST",
+                          data: $(this).serialize(),
+                          success: function(response){
+                              if(response == "true"){
+                                  showmessage("发表成功");
+                                  showPosts();
+                              }
+                          },
+                          error: function(jqXHR, textStatus, errorThrown){
+                              showmessage("发表评论失败");
+                              console.log(textStatus + ': ' + errorThrown);
+                          }
+                      });
+                  })
 
-                            for(var i = 3; i < arr.length; i+=3){//需要的是评论的id和评论的作者以及评论内容
-                                html+='<div class="card" style="margin-top: 100px;">'+
-                                    '<div class="card-header">'+
-                                        '<h4 id="comment'+arr[i]+'">'+arr[i+1]+'</h4>'+
-                                    '</div>'+
-                                    '<div class="card-body">'+
-                                        '<p>'+arr[i+2]+'</p>'
-                                    '</div>'+
-                                '</div>';
-                            }
-                            $("#posts").html(html);
-                            $(".card").fadeIn(1000);
-                        },
-                        error: function(jqXHR, textStatus, errorThrown){
-                            showmessage("获取帖子失败");
-                            console.log(textStatus + ': ' + errorThrown);
-                        }
-                    });
-                }
-            }
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                  showmessage("获取帖子失败");
+                  console.log(textStatus + ': ' + errorThrown);
+              }
+          });
+                
+            
         }
     </script>
     <script>

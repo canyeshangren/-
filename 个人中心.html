@@ -10,6 +10,11 @@
     <link rel="stylesheet" type="text/css" href="bootstrap-4.6.2-dist_and_jQuery/css/mycss.css"> <!-- 加载我写的header和footer的css部分 -->
     <script src="bootstrap-4.6.2-dist_and_jQuery/js/jquery-3.7.0.js"></script> <!-- 加载jQuery -->
     <script src="bootstrap-4.6.2-dist_and_jQuery/js/bootstrap.min.js"></script> <!-- 加载bootstrap的js部分 -->
+    <style>
+    	.empty{
+			cursor: pointer;
+		}
+    </style>
 </head>
 <body style="background-color: rgb(181, 200, 198);">
     <!--导航栏-->
@@ -50,19 +55,27 @@
             <!-- 右侧显示主要内容 -->
             <!-- 个人信息部分 -->
             <div class="content" id="personal-information">
+            	<form id="changeinformation-form" onsubmit="return false;">
                     <div class="personal-information">
                         <!-- 需要加载对应图片 -->
-                        <img class="avator" src="未上传头像.png" alt="未加载出来"/>
+                        <img class="avator" src="未上传头像.png" alt="未加载出来" id="personalimg"/>
                         <div class="personal-information-item">
-                            <h1 id="username">用户名:</h1>
-                            <h1 id="sex">性&nbsp;&nbsp;&nbsp;&nbsp;别:</h1>
-                            <h1 id="email">邮&nbsp;&nbsp;&nbsp;&nbsp;箱:</h1>
+                                         
+                                <h3>用户名:&emsp;</h3>
+                                <input type="text" id="username" name="username"/>
+                                <h3>性&emsp;别:&emsp;</h3>
+                                <input type="text"  id="sex" name="sex"/>
+                                <h3>邮&emsp;箱:&emsp;</h3>
+                                <input type="text" id="email" name="email"/>
+                            
                         </div>
-                        <button class="btn-outline-primary">修改信息</button>
+                        
                     </div>
+                    <button type="submit" id="changeinformation" class="btn-outline-primary" style="position: absolute;left: 900px;">修改信息</button>
                     <h1 style="margin-top: 20px;">个性签名:</h1>
                     <!-- 个性签名 -->
-                    <textarea rows="6"  cols="120" id="signature">请输入您的炫酷个性签名吧</textarea>
+                    <textarea rows="6"  cols="120" id="signature" placeholder="请输入您的炫酷个性签名吧" name="signature"></textarea>
+                </form>    
             </div>
 
             <!-- 我要发贴部分 -->
@@ -92,52 +105,11 @@
                             <th style="width: 15%;">创建时间</th>
                         </thead>
                         <tbody id="posts">
-                            <tr>
-                                <td><input type="checkbox"/></td>
-                                <!-- 这里的id应该为对应的postid -->
-                                <td id="posti1" style="cursor: pointer;">八嘎</td>
-                                <td>到拉圣诞节asdasdadas撒DHL就卡刷卡福建安徽福建扣税的划分开来速度加快恢复卡号快捷方式看lkhflkasfhklsdhfklsdasfasfsaf了</td>
-                                <td >到拉圣诞hhhhhhhhhh卡拉</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"/></td>
-                                <!-- 这里的id应该为对应的postid -->
-                                <td id="posti2" style="cursor: pointer;">标题</td>
-                                <td>内容</td>
-                                <td>时间</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"/></td>
-                                <!-- 这里的id应该为对应的postid -->
-                                <td id="posti3" style="cursor: pointer;">标题</td>
-                                <td>内容</td>
-                                <td>时间</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"/></td>
-                                <!-- 这里的id应该为对应的postid -->
-                                <td id="posti4" style="cursor: pointer;">标题</td>
-                                <td>内容</td>
-                                <td>时间</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"/></td>
-                                <!-- 这里的id应该为对应的postid -->
-                                <td id="posti5" style="cursor: pointer;">标题</td>
-                                <td>内容</td>
-                                <td>时间</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"/></td>
-                                <!-- 这里的id应该为对应的postid -->
-                                <td id="posti6" style="cursor: pointer;">标题</td>
-                                <td>内容</td>
-                                <td>时间</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
-                <button class="btn-primary" style="height: 50px; margin-top: 20px; position: relative; left: 800px;">全部删除</button>    
+                <button class="btn-primary" style=" width: 80px;height: 50px; margin-top: 20px; position: relative; left: 800px;" id="deletepost">删除</button>    
             </div>
             <!-- 评论管理部分 -->
             <!-- 删除的方法还没写 -->
@@ -149,36 +121,25 @@
                             <th style="width: 75%;">评论内容</th>
                             <th style="width: 15%;">创建时间</th>
                         </thead>
-                        <tbody id="posts">
-                            <tr>
-                                <td><input type="checkbox"/></td>
-                                <!-- 这里的id应该为对应的postid -->
-                                <td id="commenti1">到拉圣诞节asdasdadas撒DHL就卡刷卡福建安徽福建扣税的划分开来速度加快恢复卡号快捷方式看lkhflkasfhklsdhfklsdasfasfsaf了</td>
-                                <td >到拉圣诞hhhhhhhhhh卡拉</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"/></td>
-                                <!-- 这里的id应该为对应的postid -->
-                                <td id="commenti2">内容</td>
-                                <td>时间</td>
-                            </tr>
+                        <tbody id="comments">
+
                         </tbody>
                     </table>
                 </div>
-                <button class="btn-primary" style="height: 50px; margin-top: 20px; position: relative; left: 800px;">全部删除</button>    
+                <button class="btn-primary" style="width: 80px; height: 50px; margin-top: 20px; position: relative; left: 800px;" id="deletecomment">删除</button>    
             </div>
             <!-- 修改密码 -->
             <div class="content" id="change-password" style="display: none; justify-content: center;">
-                <form style="width: 400px;margin-top: 100px;" onsubmit="return false">
+                <form id="changepassword-form" style="width: 400px;margin-top: 100px;" onsubmit="return false">
                     <div class="form-group">
                         <label for="username">旧密码</label>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="请输入旧密码" autocomplete="username">
+                        <input type="text" class="form-control" name="oldpassword" id="oldpassword" placeholder="请输入旧密码" autocomplete="username">
                       </div>
                       <div class="form-group">
                         <label for="password">新密码</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="请输入新密码" autocomplete="new-password">
+                        <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="请输入新密码" autocomplete="new-password">
                       </div>
-                      <input type="button" style="position: relative; left: 300px;top: 30px;" value="确认修改"/>
+                      <input type="submit" style="position: relative; left: 300px;top: 30px;" value="确认修改"/>
                 </form>
             </div>
     </div>
@@ -188,6 +149,21 @@
             <p>这里是风雨无组，感谢大家的使用</p>
         </div>
     </footer>
+    <div class="modal fade" id="postdetails" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="post-title">帖子标题</h2>
+                </div>
+                <div class="modal-body">
+                    <b style="font-size: 30px;" id="post-body">帖子内容</b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="delete">删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -220,6 +196,42 @@
             $(".content tr input[type='checkbox']").click(function(event) {
                 event.stopPropagation();//阻止它向父元素冒泡，也就是两极反转
             });
+            showinformation();
+            $("#post-form").submit(function(event){
+                $.ajax({
+                    url:"postsubmit",
+                    type:"POST",
+                    data: $(this).serialize(),
+                    success: function(response){
+                        if(response == "true"){
+                            showmessage("发表成功");
+                            $('input[name="post-title"]').val(" ");
+                            $('textarea[name="post-content"]').val(" ");
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        showmessage("发表帖子失败");
+                        console.log(textStatus + ': ' + errorThrown);
+                    }
+                });
+            });
+            $("#changeinformation-form").submit(function(event){
+            	
+            	$.ajax({
+                    url:"changeinformation",
+                    type:"POST",
+                    data: $(this).serialize(),
+                    success: function(response){
+                        if(response == "true"){
+                            showmessage("修改成功");
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        showmessage("修改信息失败");
+                        console.log(textStatus + ': ' + errorThrown);
+                    }
+                });
+            });
         });
     </script>
     <script>
@@ -238,14 +250,208 @@
                     break;
                 case 'manu3':
                     $("#post-control").css("display","block");
+                    showpost();
                     break;
                 case 'manu4':
                     $("#comment-control").css("display","block");
+                    showcomment();
                     break;
                 case 'manu5':
                     $("#change-password").css("display","flex");
+                    changepassword();
                     break;
             }
+        }
+        function showinformation(){
+            $.ajax({
+                type:"POST",
+                url:"showinformation",
+                success: function(response){//后端传来的数据"gjj;男;dhsa@qq.com;sakhfkjasghfjkad"
+                    var arr = response.split(";");
+                    $("#username").val(arr[0]);
+                    $("#sex").val(arr[1]);
+                    $("#email").val(arr[2]);
+                    $("#signature").text(arr[3]);
+                    $('#personalimg').attr('src',arr[4]);
+                },
+                error: function(xhr, status, error){
+                    console.error(error);
+                    showmessage("个人信息请求失败")
+                }
+            });
+        }
+        function showpost(){
+            $.ajax({
+                url:"userpostcontrol",
+                type: "POST",
+                success: function(response){
+                    var html="";
+                    var arr=response.split(";");
+                    for(var i = 0; i < arr.length-1; i+=4){
+                        html+='<tr>'+
+                                '<td><input type="checkbox"/></td>'+
+                                '<td id="post'+arr[i]+'"class="empty" style>'+arr[i+1]+'</td>'+
+                                '<td>'+arr[i+2]+'</td>'+
+                                '<td>'+arr[i+3]+'</td>'+
+                              '</tr>';
+                    }
+                    $("#posts").html(html);
+                    $(".content tr").click(function(){
+                        var checkbox = this.querySelector("input[type='checkbox']");
+                        checkbox.checked = !checkbox.checked;
+                    });
+                    $(".content tr input[type='checkbox']").click(function(event) {
+                        event.stopPropagation();//阻止它向父元素冒泡，也就是两极反转
+                    });
+                    deletepost();
+                    postdetails();
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                        showmessage("查询帖子失败");
+                        console.log(textStatus + ': ' + errorThrown);
+                    }
+            });
+        }
+        function showcomment(){
+            $.ajax({
+                url:"usercommentcontrol",
+                type: "POST",
+                success: function(response){
+                    var html="";
+                    var arr=response.split(";");
+                    for(var i = 0; i < arr.length-1; i+=3){
+                        html+='<tr>'+
+                                '<td><input type="checkbox"/></td>'+
+                                '<td id="comment'+arr[i]+'">'+arr[i+1]+'</td>'+
+                                '<td>'+arr[i+2]+'</td>'+
+                              '</tr>';
+                    }
+                    $("#comments").html(html);
+                    $(".content tr").click(function(){
+                        var checkbox = this.querySelector("input[type='checkbox']");
+                        checkbox.checked = !checkbox.checked;
+                    });
+                    $(".content tr input[type='checkbox']").click(function(event) {
+                        event.stopPropagation();//阻止它向父元素冒泡，也就是两极反转
+                    });
+                    deletecomment();
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                        showmessage("查询评论失败");
+                        console.log(textStatus + ': ' + errorThrown);
+                    }
+            });
+        }
+        function deletepost(){
+        	$("#deletepost").click(function(){
+        		var selectedIds = '';
+        	    $('input[type=checkbox]:checked').each(function() {
+        	      var id = $(this).parent().next().attr('id');
+        	      selectedIds += id + ',';
+        	    });
+        	    selectedIds = selectedIds.slice(0, -1); // 去掉末尾的逗号
+        	    $.ajax({
+        	    	type:"POST",
+        	    	url:"deletepost?selectedIds="+selectedIds,
+        	    	success: function(response){
+                        if(response == "true"){
+                            showmessage("删除成功");
+                        	showpost();
+                        }
+        	    	},
+                    error: function(jqXHR, textStatus, errorThrown){
+                        showmessage("删除帖子失败");
+                        console.log(textStatus + ': ' + errorThrown);
+                    }
+        	    });
+        	});
+        }
+        function deletecomment(){
+        	$("#deletecomment").click(function(){
+        		var selectedIds = '';
+        	    $('input[type=checkbox]:checked').each(function() {
+        	      var id = $(this).parent().next().attr('id');
+        	      selectedIds += id + ',';
+        	    });
+        	    selectedIds = selectedIds.slice(0, -1); // 去掉末尾的逗号
+        	    $.ajax({
+        	    	type:"POST",
+        	    	url:"deletecomment?selectedIds="+selectedIds,
+        	    	success: function(response){
+                        if(response == "true"){
+                            showmessage("删除成功");
+                        	showcomment();
+                        }
+        	    	},
+                    error: function(jqXHR, textStatus, errorThrown){
+                        showmessage("删除评论失败");
+                        console.log(textStatus + ': ' + errorThrown);
+                    }
+        	    });
+        	});
+        }
+        function postdetails(){
+        	$(".empty").click(function(){
+        		var id1=$(this).attr('id');
+        		$.ajax({
+        			type:"POST",
+        			url:"postdetails?postid="+id1,
+        			success: function(response){
+        				if(response != "false"){
+	        				var arr=response.split(";");
+	        				$("#post-title").text(arr[0]);
+	        				$("#post-body").text(arr[1]);
+	        				$('#postdetails').modal('show');
+	        				$("#delete").click(function(){
+	        					$.ajax({
+	        						type:"POST",
+	        						url:"deletepost2?postid="+id1,
+	        						success: function(response){
+	        							if(response=="true"){
+	        								showmessage("删除成功");
+	        								showpost();
+	        							}	
+	        							else
+	        								showmessage("删除失败");
+	        								
+	        						},
+	        	                    error: function(jqXHR, textStatus, errorThrown){
+	        	                        showmessage("删除帖子请求失败");
+	        	                        console.log(textStatus + ': ' + errorThrown);
+	        	                    }
+	        					});
+	        				});
+	        					
+	        				
+        				}
+        				else
+        					showmessage("查看详情失败")
+        			},
+                    error: function(jqXHR, textStatus, errorThrown){
+                        showmessage("查看详情请求失败");
+                        console.log(textStatus + ': ' + errorThrown);
+                    }
+        		});
+        	});
+        }
+        function changepassword(){
+        	$("#changepassword-form").submit(function(){
+        		$.ajax({
+        			type: "POST",
+        			url: "userchangepassword",
+        			data: $(this).serialize(),
+        			success: function(response){
+        				if(response=="true")
+        					showmessage("修改成功");
+        				else
+        					showmessage("修改密码失败")
+        			},
+                    error: function(jqXHR, textStatus, errorThrown){
+                        showmessage("修改密码请求失败");
+                        console.log(textStatus + ': ' + errorThrown);
+                    }
+        		});
+        	});
         }
     </script>
     <script>

@@ -19,7 +19,7 @@
                 <h4 class="text-center">注册</h4>
               </div>
               <div class="card-body">
-                <form  id="form-register">
+                <form  id="form-register" onsubmit="return false;">
                   <div class="form-group">
                     <label for="username">用户名</label>
                     <input type="text" class="form-control" id="username" placeholder="请输入用户名" name="username">
@@ -71,10 +71,6 @@
           var username1= $("#username").val();
           var password1= $("#password1").val();
           var password2=$("#password2").val();
-          var data={
-            username: username1,
-            password: password1
-          };
           if (!username1 || !password1 || !password2){
             showmessage("请填写完整再注册");
           }
@@ -82,9 +78,10 @@
 
             $.ajax({
               type:"POST",
-              url: "#",//等待后端写好路由接口，请求所带参数包含一串字符串，以&分开，希望返回一个布尔型true表示注册成功，false表示注册失败
-              data: JSON.stringify(data),
+              url: "register",//等待后端写好路由接口，请求所带参数包含一串字符串，以&分开，希望返回一个布尔型true表示注册成功，false表示注册失败
+              data: $(this).serialize(),
               success : function(response){
+            	  console.log(response);
                 if(response == "true"){
                   showmessage("注册成功，3s后跳转至登录页面");
                   setTimeout(function() {
